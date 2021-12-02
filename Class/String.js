@@ -1,11 +1,11 @@
 class String{
  // Constructor e propriedades
-  constructor(bodyA,pointB){
+  constructor(bodyA,pointB,stiffness, legth){//novo passei mais propriedades pelo constructor pra dar pra mudar mais facilmente, pode tirar se preferir
   var options = {
     bodyA: bodyA,
     pointB: pointB,
-    length: 1,
-    stiffness: 0.10,
+    length: legth,
+    stiffness: stiffness,
     
   };
  // Criação da linha
@@ -13,11 +13,23 @@ this.string = Constraint.create(options);
  World.add(world,this.string);
  this.bodyA = bodyA;
  this.pointB = pointB;
+ //novo inventei pra fazer a linha seguir o mouse no function mouseDragged
+ this.posAX = this.string.bodyA.position.x -50;
+ this.posAY = this.string.bodyA.position.y;
   
  }
 // Função para o sketch.js
  atirar(){
   this.string.bodyA = null;
+ }
+
+ //novo
+ //função de ligar
+ ligar(){
+  this.string.bodyA =this.bodyA;
+  Body.setPosition(flecha.body, {x:8, y:215});
+  Body.setAngle(flecha.body, 0);
+  flecha.body.speed = 0;
  }
 
 
@@ -29,13 +41,13 @@ display(){
   if(this.string.bodyA){
     push();
   if(Ap.x>40 || Ap.x>100 ){
-    strokeWeight(2)
+    strokeWeight(2);
   } else{
     strokeWeight(3);
   }
-  stroke(0,0,0)
-  line(Ap.x-50, Ap.y, Bp.x-3, Bp.y-75);
-  line(Ap.x-50, Ap.y, Bp.x-3, Bp.y+75);
+  stroke(0,0,0);
+  line(this.posAX, this.posAY, Bp.x-3, Bp.y-75);
+  line(this.posAX, this.posAY, Bp.x-3, Bp.y+75);
   
   pop();
    

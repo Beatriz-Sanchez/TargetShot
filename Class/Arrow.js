@@ -3,8 +3,9 @@ class Arrow{
     var description = {
       density: 0.7,
       motion: 2,
-      isStatic: false
-      }
+      isStatic: false,
+      collisionFiler:{category: 2}//novo, dando uma categoria para aplicar o filtro no alvo e no arco
+      };
     this.image = loadImage("Images/Arrow.png");
     this.width = 50;
     this.height = 20;
@@ -17,7 +18,7 @@ class Arrow{
     push();
     translate(pos.x, pos.y);
     rotate(angle);
-    fill("white")
+    fill("white");
     imageMode(CENTER);
     image(this.image, 0, 0, 150, 70);
     pop();
